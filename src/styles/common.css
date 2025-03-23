@@ -105,9 +105,11 @@
   cursor: pointer;
   transition: all 0.25s;
   background-color: var(--background-light);
+  color: black;
 }
 
 .btn:hover {
   background-color: var(--background-lighter);
   border-color: var(--primary-color);
+  color: black;
 } 

@@ -304,6 +304,7 @@
     background-color: var(--background-light);
     margin-top: 20px;
     width: 100%;
+    color: black;
   }
   
   .submit-button:hover {
