@@ -50,13 +50,11 @@
   import GameOver from './components/GameOver.vue';
   import { 
     initializeGame, 
-    processYear, 
-    validateDecisions,
+    processYear,
   } from './game/hammurabi';
-  import { 
-    calculateFinalScore
-  } from './game/calculateFinalScore';
-  import type { GameState, PlayerDecisions } from './game/hammurabi';
+  import { calculateFinalScore } from './game/calculateFinalScore';
+  import {validateDecisions } from './game/validateDecisions';
+  import type { GameState, PlayerDecisions } from './game/types';
   
   export default defineComponent({
     name: 'App',

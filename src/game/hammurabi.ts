@@ -1,8 +1,6 @@
 import Constants  from './Constants';
 import type { GameState, YearRecord, PlayerDecisions } from './types';
 
-export type { GameState, YearRecord, PlayerDecisions };
-
 export function initializeGame(): GameState {
   const initialLandPrice = calculateLandPrice();
   
@@ -18,11 +16,6 @@ export function initializeGame(): GameState {
     gameOver: false,
     history: [],
   };
-}
-
-// Calculate how many acres can be planted with the available population
-export function maxAcresCanPlant(population: number): number {
-  return population * Constants.PLANT_ACRES_PER_PERSON;
 }
 
 // Calculate how much grain is needed to feed the population
@@ -156,54 +149,3 @@ export function processYear(state: GameState, decisions: PlayerDecisions): GameS
   return newState;
 }
 
-// Validate player decisions
-export function validateDecisions(state: GameState, decisions: PlayerDecisions): string[] {
-  const errors: string[] = [];
-  
-  // Validate land transactions
-  const costToBuy = decisions.acresToBuy * state.landPrice;
-  const maxBuyable = Math.floor(state.grain / state.landPrice);
-  
-  if (decisions.acresToBuy > 0 && decisions.acresToSell > 0) {
-    errors.push("You cannot buy and sell land in the same year.");
-  }
-  
-  if (decisions.acresToBuy > maxBuyable && state.landPrice > 0) {
-    errors.push(`You can only afford to buy ${maxBuyable} acres.`);
-  }
-  
-  if (decisions.acresToSell > state.land) {
-    errors.push(`You only have ${state.land} acres to sell.`);
-  }
-  
-  // Validate feeding
-  if (decisions.grainToFeed > state.grain - costToBuy) {
-    errors.push("You don't have enough grain to feed your people after buying land.");
-  }
-  
-  // Validate planting
-  const grainReservedForBuyingAndFeeding = costToBuy + decisions.grainToFeed;
-  const grainAvailableForPlanting = state.grain - grainReservedForBuyingAndFeeding;
-  const maxAcresCanPlantWithGrain = Math.floor(grainAvailableForPlanting * 2); // 1/2 bushel per acre
-  const maxAcresBasedOnPopulation = maxAcresCanPlant(state.population);
-  const landAfterTransactions = state.land + decisions.acresToBuy - decisions.acresToSell;
-  
-  if (decisions.acresToPlant > landAfterTransactions) {
-    errors.push(`You cannot plant more acres than you own (${landAfterTransactions}).`);
-  }
-  
-  if (decisions.acresToPlant > maxAcresBasedOnPopulation) {
-    errors.push(`Your population can only plant up to ${maxAcresBasedOnPopulation} acres.`);
-  }
-  
-  if (decisions.acresToPlant > maxAcresCanPlantWithGrain && grainAvailableForPlanting >= 0) {
-    errors.push(`You only have enough grain to plant ${Math.max(0, maxAcresCanPlantWithGrain)} acres.`);
-  }
-  
-  // Handle the case when the player doesn't have enough grain to feed and plant
-  if (grainAvailableForPlanting < 0) {
-    errors.push("You don't have enough grain for feeding and planting. Please adjust your decisions.");
-  }
-  
-  return errors;
-}

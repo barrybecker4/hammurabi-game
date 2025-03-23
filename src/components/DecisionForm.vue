@@ -128,6 +128,7 @@
     emits: ['submit-decisions'],
     setup(props, { emit }) {
 
+
       // Default to planting as much as possible after feeding
       const acresToPlant = Math.min(
           props.gameState.land,

@@ -87,7 +87,7 @@
   .stats-container {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
   
   .stat-box {
@@ -105,13 +105,14 @@
   .stat-value {
     font-size: 1.8em;
     font-weight: bold;
-    margin: 10px 0;
+    margin: 5px 0;
   }
   
   .stat-detail {
     font-size: 0.9em;
-    min-height: 40px;
+    min-height: 20px;
   }
+
   
   .positive {
     color: #2E8B57;
