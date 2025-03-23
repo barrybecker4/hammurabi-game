@@ -2,7 +2,6 @@ import Constants from './Constants';
 import type { YearRecord } from './types';
 
 
-  
 export class GameState {
 
     year: number;

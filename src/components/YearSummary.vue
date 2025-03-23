@@ -48,6 +48,7 @@
   <script lang="ts">
   import { defineComponent, computed } from 'vue';
   import type { GameState } from '../game/GameState';
+  import Constants from '../game/Constants';
   
   export default defineComponent({
     name: 'YearSummary',
@@ -61,7 +62,8 @@
       const population = computed(() => props.gameState.population);
       
       return {
-        population
+        population,
+        maxYears: Constants.MAX_YEARS,
       };
     }
   });

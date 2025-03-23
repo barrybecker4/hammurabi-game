@@ -49,10 +49,10 @@
     export default defineComponent({
         name: 'GameIntro',
         emits: ['start-game'],
-        setup(props) {
-        return {
-            maxYears: Constants.MAX_YEARS
-        };
+        setup() {
+            return {
+                maxYears: Constants.MAX_YEARS
+            };
         }
     });
   </script>
