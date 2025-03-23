@@ -5,7 +5,7 @@ export function initializeGame(): GameState {
   const initialLandPrice = calculateLandPrice();
   
   return {
-    year: 1,
+    year: 0,
     population: 100,
     grain: 2800,
     land: 1000,
@@ -134,13 +134,12 @@ export function processYear(state: GameState, decisions: PlayerDecisions): GameS
   // Update population with new arrivals
   newState.population += newArrivals;
   
+  newState.year += 1;
   // Check game over conditions (40% starved in a single year or population reaches 0)
   if (starvationRate > Constants.MAX_STARVATION_RATE || newState.population <= 0 || newState.year > Constants.MAX_YEARS) {
     newState.gameOver = true;
   }
   
-  // Update for next year
-  newState.year += 1;
   newState.landPrice = calculateLandPrice();
   
   // Add to history

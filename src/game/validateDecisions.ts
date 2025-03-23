@@ -6,7 +6,8 @@ export function validateDecisions(state: GameState, decisions: PlayerDecisions):
     const errors: string[] = [];
     
     // Validate land transactions
-    const costToBuy = decisions.acresToBuy * state.landPrice;
+    const costToBuyLand = decisions.acresToBuy * state.landPrice;
+    const profitFromSellingLand = decisions.acresToSell * state.landPrice;
     const maxBuyable = Math.floor(state.grain / state.landPrice);
     
     if (decisions.acresToBuy > 0 && decisions.acresToSell > 0) {
@@ -22,13 +23,13 @@ export function validateDecisions(state: GameState, decisions: PlayerDecisions):
     }
     
     // Validate feeding
-    if (decisions.grainToFeed > state.grain - costToBuy) {
-      errors.push("You don't have enough grain to feed your people after buying land.");
+    if (decisions.grainToFeed > state.grain - costToBuyLand + profitFromSellingLand) {
+      errors.push("You don't have enough grain to feed your people. Consider buying less, or selling more, land.");
     }
     
     // Validate planting
-    const grainReservedForBuyingAndFeeding = costToBuy + decisions.grainToFeed;
-    const grainAvailableForPlanting = state.grain - grainReservedForBuyingAndFeeding;
+    const grainReservedForBuyingAndFeeding = costToBuyLand + decisions.grainToFeed;
+    const grainAvailableForPlanting = state.grain - grainReservedForBuyingAndFeeding + profitFromSellingLand;
     const maxAcresCanPlantWithGrain = Math.floor(grainAvailableForPlanting * 2); // 1/2 bushel per acre
     const maxAcresBasedOnPopulation = maxAcresCanPlant(state.population);
     const landAfterTransactions = state.land + decisions.acresToBuy - decisions.acresToSell;
