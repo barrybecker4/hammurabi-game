@@ -111,7 +111,7 @@
   <script lang="ts">
   import Constants from '../game/Constants';
   import { defineComponent, ref, computed } from 'vue';
-  import type { GameState, PlayerDecisions } from '../game/hammurabi';
+  import type { GameState, PlayerDecisions } from '../game/types';
   
   export default defineComponent({
     name: 'DecisionForm',

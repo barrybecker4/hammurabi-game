@@ -52,8 +52,10 @@
     initializeGame, 
     processYear, 
     validateDecisions,
-    generateFinalScore
   } from './game/hammurabi';
+  import { 
+    calculateFinalScore
+  } from './game/calculateFinalScore';
   import type { GameState, PlayerDecisions } from './game/hammurabi';
   
   export default defineComponent({
@@ -87,7 +89,7 @@
           yearProcessed.value = true;
           
           if (gameState.value.gameOver) {
-            finalScore.value = generateFinalScore(gameState.value);
+            finalScore.value = calculateFinalScore(gameState.value);
           }
         }
       }
@@ -165,4 +167,4 @@
     text-align: center;
     margin-top: 30px;
   }
-  </style>
+  </style>+

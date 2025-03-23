@@ -80,7 +80,7 @@
   
   <script lang="ts">
   import { defineComponent } from 'vue';
-  import type { YearRecord } from '../game/hammurabi';
+  import type { YearRecord } from '../game/types';
   
   export default defineComponent({
     name: 'YearResults',

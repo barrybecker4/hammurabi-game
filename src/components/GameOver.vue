@@ -6,7 +6,7 @@
         <div class="parchment">
           <h3>The Chronicle of Hammurabi</h3>
           
-          <p class="intro">After governing Sumer for {{ gameState.year - 1 }} years, your reign has come to an end.</p>
+          <p class="intro">After governing Sumer for {{ gameState.year }} years, your reign has come to an end.</p>
           
           <div class="final-stats">
             <div class="stat">
@@ -61,7 +61,7 @@
   
   <script lang="ts">
   import { defineComponent } from 'vue';
-  import type { GameState } from '../game/hammurabi';
+  import type { GameState } from '../game/types';
   
   export default defineComponent({
     name: 'GameOver',

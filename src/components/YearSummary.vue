@@ -47,7 +47,7 @@
   
   <script lang="ts">
   import { defineComponent, computed } from 'vue';
-  import type { GameState } from '../game/hammurabi';
+  import type { GameState } from '../game/types';
   
   export default defineComponent({
     name: 'YearSummary',
