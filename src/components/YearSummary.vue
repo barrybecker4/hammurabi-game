@@ -69,18 +69,18 @@
   
   <style scoped>
   .year-summary {
-    background-color: #F5F5DC;
-    border: 1px solid #DEB887;
+    background-color: var(--background-lighter);
+    border: 1px solid var(--border-color);
     border-radius: 8px;
     padding: 20px;
     margin-bottom: 20px;
   }
   
   h2 {
-    color: #8B4513;
+    color: var(--primary-color);
     text-align: center;
     margin-bottom: 20px;
-    border-bottom: 1px solid #DEB887;
+    border-bottom: 1px solid var(--border-color);
     padding-bottom: 10px;
   }
   
@@ -93,16 +93,13 @@
   .stat-box {
     flex: 1;
     text-align: center;
-    padding: 15px;
-    border: 1px solid #DEB887;
-    border-radius: 6px;
     margin: 0 10px;
-    background-color: #FFFAF0;
+    composes: box;
   }
   
   .stat-box h3 {
     margin-top: 0;
-    color: #8B4513;
+    color: var(--primary-color);
   }
   
   .stat-value {
@@ -125,18 +122,20 @@
   }
   
   .helper-info {
-    background-color: #FFFAF0;
-    border: 1px solid #DEB887;
+    background-color: var(--background-light);
+    border: 1px solid var(--border-color);
     border-radius: 6px;
     padding: 15px;
+    margin-bottom: 20px;
+    text-align: left;
   }
   
   .helper-info h3 {
-    margin-top: 0;
-    color: #8B4513;
-    border-bottom: 1px solid #DEB887;
+    color: var(--primary-color);
+    border-bottom: 1px solid var(--border-color);
     padding-bottom: 5px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    margin-top: 0;
   }
   
   .helper-info ul {

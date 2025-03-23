@@ -109,6 +109,7 @@
   </template>
   
   <script lang="ts">
+  import Constants from '../game/Constants';
   import { defineComponent, ref, computed } from 'vue';
   import type { GameState, PlayerDecisions } from '../game/hammurabi';
   
@@ -126,15 +127,18 @@
     },
     emits: ['submit-decisions'],
     setup(props, { emit }) {
+
+      // Default to planting as much as possible after feeding
+      const acresToPlant = Math.min(
+          props.gameState.land,
+          props.gameState.population * Constants.PLANT_ACRES_PER_PERSON,
+          Math.floor((props.gameState.grain - (props.gameState.population * Constants.ANNUAL_PERSON_CONSUMPTION)) / 0.5)
+      );
       const decisions = ref<PlayerDecisions>({
         acresToBuy: 0,
         acresToSell: 0,
-        grainToFeed: props.gameState.population * 20, // Default to feeding everyone
-        acresToPlant: Math.min(
-          props.gameState.land,
-          props.gameState.population * 10,
-          Math.floor((props.gameState.grain - (props.gameState.population * 20)) / 0.5)
-        ) // Default to planting as much as possible after feeding
+        grainToFeed: props.gameState.population * Constants.ANNUAL_PERSON_CONSUMPTION, // Default to feeding everyone
+        acresToPlant
       });
       
       const grainAfterLandTransactions = computed(() => {
@@ -154,7 +158,7 @@
       const maxAcresCanPlant = computed(() => {
         const grainAvailableForPlanting = grainAfterLandTransactions.value - decisions.value.grainToFeed;
         const maxAcresBasedOnGrain = Math.floor(grainAvailableForPlanting * 2);
-        const maxAcresBasedOnPopulation = props.gameState.population * 10;
+        const maxAcresBasedOnPopulation = props.gameState.population * Constants.PLANT_ACRES_PER_PERSON;
         
         return Math.min(
           landAfterTransactions.value,
@@ -194,8 +198,9 @@
     background-color: #FFEBEE;
     border: 1px solid #D32F2F;
     border-radius: 4px;
-    padding: 15px;
-    margin-bottom: 20px;
+    padding: 5px;
+    margin-bottom: 10px;
+    text-align: left;
   }
   
   .error-list h3 {
@@ -206,11 +211,11 @@
   
   .error-list ul {
     margin: 0;
-    padding-left: 20px;
+    padding-left: 10;
   }
   
   .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
   
   label {
@@ -221,32 +226,32 @@
   
   input[type="number"] {
     width: 100%;
-    padding: 8px;
-    border: 1px solid #DEB887;
+    padding: 6px;
+    border: 1px solid var(--border-color);
     border-radius: 4px;
     font-size: 1.1em;
   }
   
   .input-hint {
     font-size: 0.9em;
-    color: #666;
+    color: var(--text-muted);
     margin-top: 5px;
   }
   
   .summary-box {
-    background-color: #FFFAF0;
-    border: 1px solid #DEB887;
+    background-color: var(--background-light);
+    border: 1px solid var(--border-color);
     border-radius: 6px;
-    padding: 15px;
+    padding: 5px;
     margin: 20px 0;
   }
   
   .summary-box h3 {
-    margin-top: 0;
-    color: #8B4513;
-    border-bottom: 1px solid #DEB887;
+    color: var(--primary-color);
+    border-bottom: 1px solid var(--border-color);
     padding-bottom: 5px;
     margin-bottom: 10px;
+    margin-top: 0;
   }
   
   table {
@@ -254,42 +259,43 @@
     border-collapse: collapse;
   }
   
-  td {
-    padding: 5px;
-  }
-  
-  td:first-child {
-    font-weight: bold;
-    width: 40%;
+  tbody tr:not(.total-row) td {
+    padding: 5px 0;
+    border-bottom: 1px solid var(--border-color);
   }
   
   .total-row {
-    border-top: 1px solid #DEB887;
     font-weight: bold;
+    border-top: 2px solid var(--border-color);
+  }
+  
+  .total-row td {
+    padding-top: 10px;
   }
   
   .positive {
-    color: #2E8B57;
+    color: var(--positive-color);
   }
   
   .negative {
-    color: #B22222;
+    color: var(--negative-color);
   }
   
   .submit-button {
-    display: block;
-    width: 100%;
-    background-color: #8B4513;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 12px;
-    font-size: 1.2em;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
     cursor: pointer;
+    transition: all 0.25s;
+    background-color: var(--background-light);
     margin-top: 20px;
+    width: 100%;
   }
   
   .submit-button:hover {
-    background-color: #A0522D;
+    background-color: var(--background-lighter);
+    border-color: var(--primary-color);
   }
   </style>

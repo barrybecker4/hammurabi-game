@@ -1,0 +1,113 @@
+/* Colors */
+:root {
+  --primary-color: #8B4513;
+  --border-color: #DEB887;
+  --background-light: #FFFAF0;
+  --background-lighter: #F5F5DC;
+  --positive-color: #2E8B57;
+  --negative-color: #B22222;
+  --text-muted: #666;
+}
+
+/* Common Box Styles */
+.box {
+  background-color: var(--background-light);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+/* Section Headers */
+.section-header {
+  color: var(--primary-color);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 4px;
+  margin-bottom: 10px;
+  margin-top: 0;
+}
+
+/* Grid Layouts */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 5px;
+}
+
+/* Form Elements */
+.form-group {
+  margin-bottom: 10px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 2px;
+  font-weight: bold;
+}
+
+.form-input {
+  width: 100%;
+  padding: 4px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 1.1em;
+}
+
+.input-hint {
+  font-size: 0.9em;
+  color: var(--text-muted);
+  margin-top: 5px;
+}
+
+/* Status Colors */
+.positive {
+  color: var(--positive-color);
+}
+
+.negative {
+  color: var(--negative-color);
+}
+
+/* Error Styles */
+.error-box {
+  background-color: #FFEBEE;
+  border: 1px solid #D32F2F;
+  border-radius: 4px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.error-box h3 {
+  color: #B71C1C;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+/* Stats Display */
+.stat-value {
+  font-size: 1.8em;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.stat-detail {
+  font-size: 0.9em;
+  min-height: 20px;
+}
+
+/* Button Styles */
+.btn {
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s;
+  background-color: var(--background-light);
+}
+
+.btn:hover {
+  background-color: var(--background-lighter);
+  border-color: var(--primary-color);
+} 

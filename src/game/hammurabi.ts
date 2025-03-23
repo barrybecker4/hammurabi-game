@@ -1,4 +1,5 @@
-// Core game state interface
+import Constants  from './Constants';
+
 export interface GameState {
     year: number;
     population: number;
@@ -12,7 +13,6 @@ export interface GameState {
     history: YearRecord[];
   }
   
-  // Record of each year's decisions and outcomes
   export interface YearRecord {
     year: number;
     population: number;
@@ -31,7 +31,6 @@ export interface GameState {
     acresPlanted: number;
   }
   
-  // Player decisions interface
   export interface PlayerDecisions {
     acresToBuy: number;
     acresToSell: number;
@@ -39,9 +38,7 @@ export interface GameState {
     acresToPlant: number;
   }
   
-  // Initialize a new game state
   export function initializeGame(): GameState {
-    // Set an initial land price between 17-26
     const initialLandPrice = calculateLandPrice();
     
     return {
@@ -60,36 +57,35 @@ export interface GameState {
   
   // Calculate how many acres can be planted with the available population
   export function maxAcresCanPlant(population: number): number {
-    // Each person can work 10 acres
-    return population * 10;
+    return population * Constants.PLANT_ACRES_PER_PERSON;
   }
   
   // Calculate how much grain is needed to feed the population
   export function grainNeededToFeed(population: number): number {
-    // Each person needs 20 bushels per year
-    return population * 20;
+    return population * Constants.ANNUAL_PERSON_CONSUMPTION;
   }
   
   // Calculate random land price between 17 and 26 bushels per acre
   export function calculateLandPrice(): number {
-    return Math.floor(Math.random() * 10) + 17;
+    const diff = Constants.MAX_LAND_PRICE - Constants.MIN_LAND_PRICE;
+    return Math.floor(Math.random() * diff) + Constants.MIN_LAND_PRICE;
   }
   
   // Calculate harvest yield (1-6 bushels per acre)
   export function calculateHarvest(): number {
-    return Math.floor(Math.random() * 6) + 1;
+    return Math.floor(Math.random() * Constants.MAX_GRAIN_YIELD_PER_ACRE) 
+        + Constants.MIN_GRAIN_YIELD_PER_ACRE;
   }
   
-  // Determine if plague occurs (15% chance)
+  // Determine if plague occurs 
   export function checkPlague(): boolean {
-    return Math.random() < 0.15;
+    return Math.random() < Constants.CHANCE_OF_PLAGUE;
   }
   
   // Calculate grain lost to rats (0-10% chance, with 0-30% of grain lost)
   export function calculateRatLoss(grain: number): number {
-    if (Math.random() < 0.1) {
-      // Up to 30% of grain is lost
-      const ratPercentage = Math.random() * 0.3;
+    if (Math.random() < Constants.CHANCE_RATS_EAST_GRAIN) {
+      const ratPercentage = Math.random() * Constants.MAX_RAT_CONSUMPTION;
       return Math.floor(grain * ratPercentage);
     }
     return 0;
@@ -97,17 +93,16 @@ export interface GameState {
   
   // Calculate new immigrants (based on land and grain)
   export function calculateNewcomers(land: number, grain: number, starvationRate: number): number {
-    // No new arrivals if people are starving
     if (starvationRate > 0) return 0;
     
     // Otherwise, a random number of people arrive based on available land and food
-    const potential = Math.floor((land + grain / 20) / 100);
+    const potential = Math.floor((land + grain / Constants.ANNUAL_PERSON_CONSUMPTION) / 100);
     return Math.max(0, Math.floor(Math.random() * 5) + potential);
   }
   
   // Calculate number of people who starve
   export function calculateStarvation(population: number, grainFed: number): number {
-    const canFeed = Math.floor(grainFed / 20);
+    const canFeed = Math.floor(grainFed / Constants.ANNUAL_PERSON_CONSUMPTION);
     return Math.max(0, population - canFeed);
   }
   
@@ -182,7 +177,7 @@ export interface GameState {
     newState.population += newArrivals;
     
     // Check game over conditions (40% starved in a single year or population reaches 0)
-    if (starvationRate > 0.4 || newState.population <= 0) {
+    if (starvationRate > Constants.MAX_STARVATION_RATE || newState.population <= 0) {
       newState.gameOver = true;
     }
     
@@ -265,7 +260,7 @@ export interface GameState {
     
     // Average starvation rate
     const totalStarved = state.history.reduce((sum, year) => sum + year.peopleStarved, 0);
-    const avgStarvationRate = totalStarved / (state.year * 100); // Normalized to starting population of 100
+    const avgStarvationRate = totalStarved / (state.year * Constants.INITIAL_POPULATION); // Normalized to starting population of 100
     
     if (totalScore > 8000) {
       message = "Your rule was legendary! Songs will be sung of your wisdom for generations!";

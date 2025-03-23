@@ -99,14 +99,15 @@
   }
   
   .result-section {
-    margin-bottom: 25px;
+    margin-bottom: 15px;
   }
   
-  h3 {
-    color: #8B4513;
-    border-bottom: 1px solid #DEB887;
+  .result-section h3 {
+    color: var(--primary-color);
+    border-bottom: 1px solid var(--border-color);
     padding-bottom: 5px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
+    margin-top: 0;
   }
   
   .result-grid {
@@ -116,20 +117,11 @@
   }
   
   .result-item {
-    background-color: #FFFAF0;
-    border: 1px solid #DEB887;
-    border-radius: 4px;
-    padding: 12px;
-  }
-  
-  .negative-event {
-    background-color: #FFEBEE;
-    border-color: #D32F2F;
-  }
-  
-  .positive-event {
-    background-color: #E8F5E9;
-    border-color: #388E3C;
+    background-color: var(--background-light);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 5px;
+    margin-bottom: 10px;
   }
   
   .label {
@@ -142,17 +134,27 @@
   }
   
   .noble-message {
-    margin-top: 30px;
-    padding: 15px;
     background-color: #FFF8E1;
     border: 1px solid #FFB300;
-    border-radius: 8px;
+    border-radius: 6px;
+    padding: 10px;
+    margin-top: 20px;
     font-style: italic;
   }
   
   .message {
-    margin: 10px 0;
+    margin: 5px 0;
     font-size: 1.1em;
+  }
+  
+  .negative-event {
+    background-color: #FFEBEE;
+    border-color: #D32F2F;
+  }
+  
+  .positive-event {
+    background-color: #E8F5E9;
+    border-color: #388E3C;
   }
   
   .message.severe {
