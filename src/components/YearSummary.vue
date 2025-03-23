@@ -1,6 +1,6 @@
 <template>
     <div class="year-summary">
-      <h2>The State of Your Kingdom - Year {{ gameState.year }}</h2>
+      <h2>The State of Your Kingdom - Year {{ gameState.year }} of {{ maxYears }}</h2>
       
       <div class="stats-container">
         <div class="stat-box">
@@ -47,7 +47,7 @@
   
   <script lang="ts">
   import { defineComponent, computed } from 'vue';
-  import type { GameState } from '../game/types';
+  import type { GameState } from '../game/GameState';
   
   export default defineComponent({
     name: 'YearSummary',
@@ -72,8 +72,8 @@
     background-color: var(--background-lighter);
     border: 1px solid var(--border-color);
     border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 20px;
+    padding: 10px;
+    margin-bottom: 0;
   }
   
   h2 {
@@ -126,8 +126,8 @@
     background-color: var(--background-light);
     border: 1px solid var(--border-color);
     border-radius: 6px;
-    padding: 15px;
-    margin-bottom: 20px;
+    padding: 10px;
+    margin-bottom: 10px;
     text-align: left;
   }
   

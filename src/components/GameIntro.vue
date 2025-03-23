@@ -32,6 +32,7 @@
           <li>Each person needs 20 bushels of grain per year to survive</li>
           <li>Each person can farm at most 10 acres</li>
           <li>It takes 1/2 bushel of grain to plant an acre</li>
+          <li>If all goes well, you will finish ruling after {{ maxYears }} years</li>
         </ul>
         
         <p class="warning">If more than 40% of your people starve in a single year, the people will revolt and your rule will end!</p>
@@ -42,12 +43,18 @@
   </template>
   
   <script lang="ts">
-  import { defineComponent } from 'vue';
-  
-  export default defineComponent({
-    name: 'GameIntro',
-    emits: ['start-game']
-  });
+    import { defineComponent } from 'vue';
+    import Constants from '../game/Constants';
+    
+    export default defineComponent({
+        name: 'GameIntro',
+        emits: ['start-game'],
+        setup(props) {
+        return {
+            maxYears: Constants.MAX_YEARS
+        };
+        }
+    });
   </script>
   
   <style scoped>

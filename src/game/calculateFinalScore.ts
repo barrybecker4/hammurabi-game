@@ -1,5 +1,5 @@
 import Constants  from './Constants';
-import type { GameState } from './types';
+import type { GameState } from './GameState';
 
 
 /** 
@@ -38,7 +38,7 @@ export function calculateFinalScore(state: GameState): { score: number; message:
     }
     
     if (avgStarvationRate > 0.25) {
-      message += " However, many people starved during your reign, tarnishing your legacy.";
+      message += " Many people starved during your reign, tarnishing your legacy.";
     }
     
     return { score: totalScore, message };

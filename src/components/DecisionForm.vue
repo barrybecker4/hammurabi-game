@@ -73,12 +73,12 @@
           <table>
             <tbody>
               <tr>
-                <td>Current grain:</td>
-                <td>{{ gameState.grain }} bushels</td>
+                <td class="column1">Current grain:</td>
+                <td class="column2">{{ gameState.grain }} bushels</td>
               </tr>
               <tr>
-                <td>Land transactions:</td>
-                <td>
+                <td class="column1">Land transactions:</td>
+                <td class="column2">
                   <span v-if="decisions.acresToBuy > 0" class="negative">
                     -{{ decisions.acresToBuy * gameState.landPrice }} bushels
                   </span>
@@ -88,16 +88,16 @@
                 </td>
               </tr>
               <tr>
-                <td>Feeding cost:</td>
-                <td class="negative">-{{ decisions.grainToFeed }} bushels</td>
+                <td class="column1">Feeding cost:</td>
+                <td class="column2 negative">-{{ decisions.grainToFeed }} bushels</td>
               </tr>
               <tr>
-                <td>Planting cost:</td>
-                <td class="negative">-{{ Math.ceil(decisions.acresToPlant / 2) }} bushels</td>
+                <td class="column1">Planting cost:</td>
+                <td class="column2 negative">-{{ Math.ceil(decisions.acresToPlant / 2) }} bushels</td>
               </tr>
               <tr class="total-row">
-                <td>Remaining grain:</td>
-                <td :class="{ negative: remainingGrain < 0 }">{{ remainingGrain }} bushels</td>
+                <td class="column1">Remaining grain:</td>
+                <td :class="{ column2: true, negative: remainingGrain < 0 }">{{ remainingGrain }} bushels</td>
               </tr>
             </tbody>
           </table>
@@ -111,7 +111,8 @@
   <script lang="ts">
   import Constants from '../game/Constants';
   import { defineComponent, ref, computed } from 'vue';
-  import type { GameState, PlayerDecisions } from '../game/types';
+  import type { PlayerDecisions } from '../game/types';
+  import { GameState } from '../game/GameState';
   
   export default defineComponent({
     name: 'DecisionForm',
@@ -260,8 +261,10 @@
     border-collapse: collapse;
   }
   
+  tbody td {
+    padding: 0 40px 0 40px;
+  }
   tbody tr:not(.total-row) td {
-    padding: 5px 0;
     border-bottom: 1px solid var(--border-color);
   }
   
@@ -271,7 +274,15 @@
   }
   
   .total-row td {
-    padding-top: 10px;
+    padding-top: 4px;
+  }
+
+  .column1 {
+    text-align: left;
+  }
+
+  .column2 {
+    text-align: right;
   }
   
   .positive {

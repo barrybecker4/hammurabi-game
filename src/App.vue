@@ -48,13 +48,11 @@
   import DecisionForm from './components/DecisionForm.vue';
   import YearResults from './components/YearResults.vue';
   import GameOver from './components/GameOver.vue';
-  import { 
-    initializeGame, 
-    processYear,
-  } from './game/hammurabi';
+  import { GameState } from './game/GameState';
   import { calculateFinalScore } from './game/calculateFinalScore';
-  import {validateDecisions } from './game/validateDecisions';
-  import type { GameState, PlayerDecisions } from './game/types';
+  import { validateDecisions } from './game/validateDecisions';
+  import { processYear } from './game/processYear';
+  import type { PlayerDecisions } from './game/types';
   
   export default defineComponent({
     name: 'App',
@@ -67,13 +65,13 @@
     },
     setup() {
       const showIntro = ref(true);
-      const gameState = ref<GameState>(initializeGame());
+      const gameState = ref<GameState>(new GameState());
       const yearProcessed = ref(false);
       const validationErrors = ref<string[]>([]);
       const finalScore = ref({ score: 0, message: '' });
   
       function startGame() {
-        gameState.value = initializeGame();
+        gameState.value = new GameState();
         showIntro.value = false;
         yearProcessed.value = false;
         validationErrors.value = [];
@@ -112,7 +110,7 @@
   
   <style>
   .hammurabi-game {
-    max-width: 800px;
+    width: 700px;
     margin: 0 auto;
     padding: 20px;
     font-family: 'Palatino', serif;

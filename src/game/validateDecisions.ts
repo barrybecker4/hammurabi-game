@@ -1,5 +1,6 @@
 import Constants  from './Constants';
-import type { GameState, PlayerDecisions } from './types';
+import type { PlayerDecisions } from './types';
+import { GameState } from './GameState';
 
 // Validate player decisions
 export function validateDecisions(state: GameState, decisions: PlayerDecisions): string[] {

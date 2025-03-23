@@ -1,16 +1,3 @@
-export interface GameState {
-  year: number;
-  population: number;
-  grain: number;
-  land: number;
-  landPrice: number;
-  peopleStarved: number;
-  peopleArrived: number;
-  plagueOccurred: boolean;
-  gameOver: boolean;
-  history: YearRecord[];
-}
-
 export interface YearRecord {
   year: number;
   population: number;

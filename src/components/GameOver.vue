@@ -61,7 +61,7 @@
   
   <script lang="ts">
   import { defineComponent } from 'vue';
-  import type { GameState } from '../game/types';
+  import type { GameState } from '../game/GameState';
   
   export default defineComponent({
     name: 'GameOver',
